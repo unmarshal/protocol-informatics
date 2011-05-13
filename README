@@ -1,0 +1,191 @@
+The Protocol Informatics Framework
+Written by Marshall Beddoe <mbeddoe@baselineresearch.net>
+Copyright (c) 2004 Baseline Research
+----
+
+Overview:
+
+The Protocol Informatics project is a software framework that allows for
+advanced sequence and protocol stream analysis by utilizing bioinformatics
+algorithms. The sole purpose of this software is to identify protocol fields in
+unknown or poorly documented network protocol formats. The algorithms that are
+utilized perform comparative analysis on a series of samples to better
+understand the underlying structure of the otherwise random-looking data. The
+PI framework was designed for experimentation through the use of a widget-based
+component set.
+
+Requirements:
+
+Python >= 2.3.4     http://www.python.org
+Numerical Python    http://www.stsci.edu/resources/software_hardware/numarray
+Pyrex               http://www.cosc.canterbury.ac.nz/~greg/python/Pyrex/
+Pcapy               http://oss.coresecurity.com/projects/pcapy.html
+Pydot               http://dkbza.org/pydot.html
+
+This software has been tested and works correctly under:
+    - OpenBSD
+    - FreeBSD
+    - Linux
+    - MacOSX
+
+Example usage: Analyzing the ICMP protocol
+
+ICMP is a simple fixed length protocol.
+Let's use the PI framework to discover the format.
+
+Step 1: Gather 100 ICMP packets using tcpdump
+
+# tcpdump -s 42 -c 100 -nl -w icmp.dump icmp
+
+Step 2: Run dump through PI prototype
+
+# ./main.py -g -p ./icmp.dump
+
+Protocol Informatics Prototype (v0.01 beta)
+Written by Marshall Beddoe <mbeddoe@baselineresearch.net>
+Copyright (c) 2004 Baseline Research
+
+Found 100 unique sequences in '../dumps/icmp.out'
+Creating distance matrix .. complete
+Creating phylogenetic tree .. complete
+
+Discovered 1 clusters using a weight of 1.00
+Performing multiple alignment on cluster 1 .. complete
+
+Output of cluster 1
+0097 x08 x00 xad x4b x05 xbe x00 x60
+0039 x08 x00 x30 x54 x05 xbe x00 x26
+0026 x08 x00 xf7 xb2 x05 xbe x00 x19
+0015 x08 x00 x01 xdb x05 xbe x00 x0e
+0048 x08 x00 x4f xdf x05 xbe x00 x2f
+0040 x08 x00 xf8 xa4 x05 xbe x00 x27
+0077 x08 x00 xe8 x28 x05 xbe x00 x4c
+0017 x08 x00 xe8 x6c x05 xbe x00 x10
+0027 x08 x00 xc3 xa9 x05 xbe x00 x1a
+0087 x08 x00 xdd xc1 x05 xbe x00 x56
+0081 x08 x00 x88 x42 x05 xbe x00 x50
+0058 x08 x00 xb0 x42 x05 xbe x00 x39
+0013 x08 x00 x3e x38 x05 xbe x00
+0067 x08 x00 x99 x36 x05 xbe x00 x42
+0055 x08 x00 x0f x56 x05 xbe x00 x36
+0004 x08 x00 xe6 xda x05 xbe x00 x03
+0028 x08 x00 x83 xd9 x05 xbe x00 x1b
+0095 x08 x00 xc1 xd9 x05 xbe x00 x5e
+0075 x08 x00 x3a x63 x05 xbe x00 x4a
+0053 x08 x00 x6d x2a x05 xbe x00 x34
+0021 x08 x00 x6d x8d x05 xbe x00 x14
+0088 x08 x00 xa8 x07 x05 xbe x00 x57
+0005 x08 x00 xa8 x8a x05 xbe x00 x04
+0080 x08 x00 xa8 x62 x05 xbe x00 x4f
+0023 x08 x00 x3f x18 x05 xbe x00 x16
+0002 x08 x00 x3f x65 x05 xbe x00 x01
+0074 x08 x00 x3f xc2 x05 xbe x00 x49
+0030 x08 x00 x3f x15 x05 xbe x00 x1d
+0044 x08 x00 xcc xc2 x05 xbe x00 x2b
+0078 x08 x00 xcc x8a x05 xbe x00 x4d
+0071 x08 x00 xd8 x18 x05 xbe x00 x46
+0035 x08 x00 x9a xfd x05 xbe x00 x22
+0001 x08 x00 x69 xf9 x05 xbe x00 x00
+0034 x08 x00 xc5 x9e x05 xbe x00 x21
+0031 x08 x00 x38 x00 x05 xbe x00 x1e
+0092 x08 x00 x38 x4c x05 xbe x00 x5b
+0100 x08 x00 x2b x1a x05 xbe x00 x63
+0049 x08 x00 x15 x1d x05 xbe x00 x30
+0008 x08 x00 x2f x64 x05 xbe x00 x07
+0089 x08 x00 x80 xe5 x05 xbe x00 x58
+0096 x08 x00 xb2 xb0 x05 xbe x00 x5f
+0079 x08 x00 xc2 xae x05 xbe x00 x4e
+0057 x08 x00 xc2 x79 x05 xbe x00 x38
+0046 x08 x00 x77 x7a x05 xbe x00 x2d
+0018 x08 x00 xbb xce x05 xbe x00 x11
+0025 x08 x00 xfe xaa x05 xbe x00 x18
+0068 x08 x00 x50 xe3 x05 xbe x00 x43
+0065 x08 x00 xe0 xb7 x05 xbe x00 x40
+0011 x08 x00 x8d xd6 x05 xbe x00
+0029 x08 x00 x7c xf3 x05 xbe x00 x1c
+0033 x08 x00 xef xf3 x05 xbe x00
+0069 x08 x00 x25 x6b x05 xbe x00 x44
+0083 x08 x00 x25 xff x05 xbe x00 x52
+0099 x08 x00 x56 x99 x05 xbe x00 x62
+0061 x08 x00 x33 x81 x05 xbe x00 x3c
+0050 x08 x00 xe9 xba x05 xbe x00 x31
+0042 x08 x00 xb3 x49 x05 xbe x00 x29
+0059 x08 x00 x81 x4e x05 xbe x00 x3a
+0098 x08 x00 x81 xad x05 xbe x00 x61
+0091 x08 x00 x42 xa0 x05 xbe x00 x5a
+0054 x08 x00 x42 xd8 x05 xbe x00 x35
+0037 x08 x00 x4c xe8 x05 xbe x00 x24
+0041 x08 x00 xeb x4d x05 xbe x00 x28
+0086 x08 x00 xe4 x53 x05 xbe x00 x55
+0006 x08 x00 x71 x7b x05 xbe x00 x05
+0012 x08 x00 x63 x7b x05 xbe x00
+0070 x08 x00 xee x7d x05 xbe x00 x45
+0051 x08 x00 xc8 x57 x05 xbe x00 x32
+0066 x08 x00 xb4 x3c x05 xbe x00 x41
+0014 x08 x00 x2c x26 x05 xbe x00
+0062 x08 x00 x2c x7c x05 xbe x00 x3d
+0016 x08 x00 xed x8e x05 xbe x00 x0f
+0007 x08 x00 x47 x3d x05 xbe x00 x06
+0073 x08 x00 x5e x72 x05 xbe x00 x48
+0052 x08 x00 x9e x06 x05 xbe x00 x33
+0072 x08 x00 x9e x9d x05 xbe x00 x47
+0036 x08 x00 x6f x6e x05 xbe x00 x23
+0060 x08 x00 x6c xc6 x05 xbe x00 x3b
+0045 x08 x00 xa2 xf5 x05 xbe x00 x2c
+0085 x08 x00 x00 x47 x05 xbe x00 x54
+0076 x08 x00 x14 x85 x05 xbe x00 x4b
+0020 x08 x00 xa0 x85 x05 xbe x00 x13
+0019 x08 x00 xa6 x2c x05 xbe x00 x12
+0003 x08 x00 x14 x2c x05 xbe x00 x02
+0022 x08 x00 x44 x8c x05 xbe x00 x15
+0082 x08 x00 x5d xe0 x05 xbe x00 x51
+0009 x08 x00 xfc x41 x05 xbe x00 x08
+0084 x08 x00     x35 x05 xbe x00 x53
+0032 x08 x00 x0e x17 x05 xbe x00 x1f
+0056 x08 x00 xe5     x05 xbe x00 x37
+0043 x08 x00 xa1 xde x05 xbe x00 x2a
+0094 x08 x00 x03 x92 x05 xbe x00 x5d
+0047 x08 x00 x55 x83 x05 xbe x00 x2e
+0090 x08 x00 x55 x94 x05 xbe x00 x59
+0064 x08 x00     x8f x05 xbe x00 x3f
+0093 x08 x00     xb6 x05 xbe x00 x5c
+0010 x08 x00 xd1 xb6 x05 xbe x00
+0024 x08 x00 x11 x8f x05 xbe x00 x17
+0063 x08 x00 x11 x04 x05 xbe x00 x3e
+0038 x08 x00 x37 x3b x05 xbe x00 x25
+DT   BBB ZZZ BBB BBB BBB BBB ZZZ AAA
+MT   000 000 081 089 000 000 000 100
+
+Ungapped Consensus:
+CONS x08 x00 x3f x18 x05 xbe x00 ???
+DT   BBB ZZZ BBB BBB BBB BBB ZZZ AAA
+MT   000 000 081 089 000 000 000 100
+
+Step 3: Analyze Consensus Sequence
+
+Pay attention to datatype composition and mutation rate.
+
+Offset 0: Binary data, 0% mutation rate
+Offset 1: Zeroed data, 0% mutation rate
+Offset 2: Binary data, 81% mutation rate
+Offset 3: Binary data, 89% mutation rate
+Offset 4: Binary data, 0% mutation rate
+Offset 5: Binary data, 0% mutation rate
+Offset 6: Zeroed data, 0% mutation rate
+Offset 7: ASCII data, 100% mutation rate
+
+Using this information we can construct the structure of the format:
+
+[ 1 byte ] [ 1 byte ] [ 2 byte ] [ 2 byte ] [ 1 byte ] [ 1 byte ]
+
+The real format of an ICMP message:
+
+[ 1 byte ] [ 1 byte ] [ 2 byte ] [ 2 byte ] [ 2 byte ]
+
+The reason PI made the mistake in identifying the last field was due to the
+fact that the last field in an ICMP packet is a 16 bit sequence identifier.
+We only gathered 100 packets therefore the greatest significant byte never
+changed as the field incremented.
+
+Therefore, it is very important to gather data efficiently as PI is only as
+good as the data that is fed to it.
