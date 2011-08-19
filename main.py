@@ -17,6 +17,8 @@ def main():
     print "Written by Marshall Beddoe <mbeddoe@baselineresearch.net>"
     print "Copyright (c) 2004 Baseline Research\n"
 
+    print "hello world!"
+
     # Defaults
     format = None
     weight = 1.0
